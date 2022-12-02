@@ -1,2 +1,2 @@
 # tantara
-Full-text search in WASM powered by Tantivy
+Full-text search in WASM
