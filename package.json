@@ -1,0 +1,13 @@
+{
+  "name": "tantara",
+  "version": "0.1.0",
+  "description": "Full-text search in WASM",
+  "main": "index.js",
+  "repository": "git@github.com:tantaraio/tantara.git",
+  "author": "Daw-Chih Liou <dawochih.liou@gmail.com>",
+  "license": "Apache License 2.0",
+  "private": true,
+  "devDependencies": {
+    "cz-conventional-changelog-with-jiraid-detection": "^1.0.4"
+  }
+}
