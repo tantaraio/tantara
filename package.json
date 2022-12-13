@@ -7,12 +7,22 @@
   "author": "Daw-Chih Liou <dawochih.liou@gmail.com>",
   "license": "Apache License 2.0",
   "private": true,
+  "scripts": {
+    "build": "wasm-pack build",
+    "test": "wasm-pack test --node --firefox --chrome --safari --headless",
+    "publish": "wasm-pack pack && wasm-publish",
+    "lint": "cargo clippy --all-targets --all-features",
+    "format": "cargo fmt",
+    "prepare": "husky install"
+  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog-with-jiraid-detection"
     }
   },
   "devDependencies": {
-    "cz-conventional-changelog-with-jiraid-detection": "^1.0.4"
+    "cz-conventional-changelog-with-jiraid-detection": "^1.0.4",
+    "husky": "^8.0.2",
+    "lint-staged": "^13.1.0"
   }
 }

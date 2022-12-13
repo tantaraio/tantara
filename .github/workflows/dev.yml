@@ -1,0 +1,49 @@
+name: Development Workflow
+
+on:
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run Clippy
+        run: cargo clippy --all-targets --all-features
+
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run rustfmt
+        run: cargo fmt
+
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run cargo check
+        run: cargo check
+
+  test:
+    runs-on: ubuntu-latest
+    needs: [compile]
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install wasm-pack
+        run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+
+      - name: Run Unit Test
+        run: cargo test
+
+      - name: Run E2E Test - Chrome
+        run: wasm-pack test --headless --chrome
+
+      - name: Run E2E Test - FireFox
+        run: wasm-pack test --headless --firefox

@@ -2,7 +2,7 @@
 name = "tantara"
 version = "0.1.0"
 authors = ["Daw-Chih Liou <dawochih.liou@gmail.com>"]
-edition = "2018"
+edition = "2021"
 
 [lib]
 crate-type = ["cdylib", "rlib"]

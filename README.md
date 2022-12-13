@@ -3,25 +3,53 @@
   <strong>Full-text search built with Rust and WebAssembly🦀🕸</strong>
 </div>
 
+## Quick Start
+
+**Step 1: Install Rustup**
+
+Install [Rustup](https://rustup.rs). We'll use it to install dependencies. If you already installed Rustup, you can update to the latest version.
+
+```bash
+rustup update
+```
+
+**Step 2: Install Development Tools**
+
+```bash
+# Install Clippy
+rustup component add clippy
+
+# Install rustfmt
+rustup component add rustfmt
+```
+
 ## Available Scripts
 
-### 🛠️ Build with `wasm-pack build`
+### 🛠️ Build with `yarn build`
 
-```
-wasm-pack build
-```
+It runs [`wasm-pack build`](https://rustwasm.github.io/wasm-pack/book/commands/build.html) to create necessary files for publishing a npm package.
 
-### 🔬 Test in Headless Browsers with `wasm-pack test`
+### 🧪 Test in Headless Browsers with `yarn test`
 
-```
-wasm-pack test --headless --firefox
-```
+It runs the [end-to-end test](https://rustwasm.github.io/wasm-pack/book/commands/test.html) with headless browsers and Node.js. The browsers are:
 
-### 🎁 Publish to NPM with `wasm-pack publish`
+- Chrome
+- Firefox
+- Safari
 
-```
-wasm-pack publish
-```
+You'll need to have the browsers installed in your machine to run the test script.
+
+### 🎁 Publish to npm with `yarn publish`
+
+It [creates a tarball and publishes on npm](https://rustwasm.github.io/wasm-pack/book/commands/pack-and-publish.html).
+
+### 🔬 Lint with `yarn lint`
+
+It runs [Clippy](https://github.com/rust-lang/rust-clippy) to lint and fix the source code.
+
+### 📝 Format with `yarn format`
+
+It runs [rustfmt](https://github.com/rust-lang/rustfmt) to format Rust code according to community style guidelines.
 
 ## 🔋 Batteries Included
 
