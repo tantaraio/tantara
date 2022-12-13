@@ -22,12 +22,12 @@ jobs:
       - name: Lint
         run: cargo fmt
 
-  check:
+  compile:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
 
-      - name: Compile
+      - name: Check
         run: cargo check
 
   test:
