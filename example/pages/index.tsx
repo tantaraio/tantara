@@ -7,7 +7,7 @@ import { useEffect } from "react";
 export default function Home() {
   useEffect(() => {
     greet();
-  });
+  }, []);
 
   return (
     <div className={styles.container}>

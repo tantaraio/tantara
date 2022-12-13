@@ -4,7 +4,7 @@ const nextConfig = {
   swcMinify: true,
   webpack: function (config, { isServer }) {
     // it makes a WebAssembly modules async modules
-    config.experiments = { asyncWebAssembly: true };
+    config.experiments = { asyncWebAssembly: true, layers: true };
 
     // generate wasm module in ".next/server" for ssr & ssg
     if (isServer) {
