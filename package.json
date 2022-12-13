@@ -7,6 +7,12 @@
   "author": "Daw-Chih Liou <dawochih.liou@gmail.com>",
   "license": "Apache License 2.0",
   "private": true,
+  "scripts": {
+    "build": "wasm-pack build",
+    "test": "wasm-pack test --node --firefox --chrome --safari --headless",
+    "publish": "wasm-pack pack && wasm-publish",
+    "lint": "cargo clippy --fix"
+  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog-with-jiraid-detection"

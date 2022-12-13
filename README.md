@@ -5,23 +5,29 @@
 
 ## Available Scripts
 
-### 🛠️ Build with `wasm-pack build`
+### 🛠️ Build with `yarn build`
+
+It runs [`wasm-pack build`](https://rustwasm.github.io/wasm-pack/book/commands/build.html) to create necessary files for publishing a npm package.
+
+### 🔬 Test in Headless Browsers with `yarn test`
+
+It runs the [end-to-end test](https://rustwasm.github.io/wasm-pack/book/commands/test.html) with headless browsers and Node.js.
 
 ```
-wasm-pack build
+wasm-pack test --node --firefox --chrome --safari --headless
 ```
 
-### 🔬 Test in Headless Browsers with `wasm-pack test`
+### 🎁 Publish to npm with `yarn publish`
+
+It [creates a tarball and publishes on npm](https://rustwasm.github.io/wasm-pack/book/commands/pack-and-publish.html).
 
 ```
-wasm-pack test --headless --firefox
+wasm-pack pack & wasm-pack publish
 ```
 
-### 🎁 Publish to NPM with `wasm-pack publish`
+### Lint with `yarn lint`
 
-```
-wasm-pack publish
-```
+It runs [Clippy](https://github.com/rust-lang/rust-clippy) to lint and fix the source code.
 
 ## 🔋 Batteries Included
 
