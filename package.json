@@ -11,7 +11,8 @@
     "build": "wasm-pack build",
     "test": "wasm-pack test --node --firefox --chrome --safari --headless",
     "publish": "wasm-pack pack && wasm-publish",
-    "lint": "cargo clippy --fix"
+    "lint": "cargo clippy --fix",
+    "format": "cargo fmt"
   },
   "config": {
     "commitizen": {
