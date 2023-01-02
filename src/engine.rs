@@ -40,12 +40,10 @@ pub fn create() -> Result<Index> {
 }
 
 pub fn add(index: Index, docs: Vec<Document>) -> Result<Index> {
-    docs.iter()
-        .map(|doc| {
-            index.writer.add_document(doc.clone())?;
-            Ok(())
-        })
-        .collect::<Result<()>>()?;
+    docs.iter().try_for_each(|doc| -> Result<()> {
+        index.writer.add_document(doc.clone())?;
+        Ok(())
+    })?;
 
     Ok(index)
 }
@@ -57,7 +55,7 @@ pub fn commit(mut index: Index) -> Result<Index> {
     Ok(index)
 }
 
-pub fn remove(mut index: Index, field: Field, text: &str) -> Result<Index> {
+pub fn remove(index: Index, field: Field, text: &str) -> Result<Index> {
     let term = Term::from_field_text(field, text);
 
     index.writer.delete_term(term);
