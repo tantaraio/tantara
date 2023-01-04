@@ -6,7 +6,7 @@ struct FieldOptions {
 }
 
 enum FieldType {
-    TEXT,
+    Text,
     U64,
 }
 
@@ -21,7 +21,7 @@ pub type SchemaConfig = Vec<Field>;
 pub fn create_schema(config: &SchemaConfig, schema_builder: &mut SchemaBuilder) {
     config.iter().for_each(|field| {
         match field.field_type {
-            FieldType::TEXT => {
+            FieldType::Text => {
                 let options = get_text_options(&field.options);
                 schema_builder.add_text_field(&field.name, options);
             }
