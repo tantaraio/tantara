@@ -1,3 +1,4 @@
+use schema::{create_schema, SchemaConfig};
 use tantivy::collector::TopDocs;
 use tantivy::query::QueryParser;
 use tantivy::schema::*;
@@ -7,7 +8,9 @@ use tantivy::IndexWriter;
 use tantivy::ReloadPolicy;
 use tantivy::Result;
 
-pub struct Index {
+mod schema;
+
+pub struct Registry {
     index: tantivy::Index,
     schema: Schema,
     fields: Vec<Field>,
@@ -15,11 +18,14 @@ pub struct Index {
     reader: IndexReader,
 }
 
-pub fn create() -> Result<Index> {
-    let schema_builder = Schema::builder();
+pub struct Input {
+    schema: SchemaConfig,
+}
 
-    // @TODO: create schema
-    // @TODO: create fields from schema input
+pub fn create(input: Input) -> Result<Registry> {
+    let mut schema_builder = Schema::builder();
+
+    create_schema(&input.schema, &mut schema_builder);
 
     let fields = vec![];
     let schema = schema_builder.build();
@@ -30,7 +36,7 @@ pub fn create() -> Result<Index> {
         .reload_policy(ReloadPolicy::OnCommit)
         .try_into()?;
 
-    Ok(Index {
+    Ok(Registry {
         index,
         schema,
         fields,
@@ -39,7 +45,7 @@ pub fn create() -> Result<Index> {
     })
 }
 
-pub fn add(index: Index, docs: Vec<Document>) -> Result<Index> {
+pub fn add(index: Registry, docs: Vec<Document>) -> Result<Registry> {
     docs.iter().try_for_each(|doc| -> Result<()> {
         index.writer.add_document(doc.clone())?;
         Ok(())
@@ -48,14 +54,14 @@ pub fn add(index: Index, docs: Vec<Document>) -> Result<Index> {
     Ok(index)
 }
 
-pub fn commit(mut index: Index) -> Result<Index> {
+pub fn commit(mut index: Registry) -> Result<Registry> {
     index.writer.commit()?;
     index.reader.reload()?;
 
     Ok(index)
 }
 
-pub fn remove(index: Index, field: Field, text: &str) -> Result<Index> {
+pub fn remove(index: Registry, field: Field, text: &str) -> Result<Registry> {
     let term = Term::from_field_text(field, text);
 
     index.writer.delete_term(term);
@@ -64,7 +70,7 @@ pub fn remove(index: Index, field: Field, text: &str) -> Result<Index> {
 }
 
 pub fn search(
-    index: Index,
+    index: Registry,
     query: &str,
     limit: Option<usize>,
 ) -> tantivy::Result<Vec<(f32, DocAddress)>> {
